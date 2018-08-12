@@ -134,13 +134,13 @@ end
     let rec insert (n: int) = function
                      Nil -> mk_suffix n
     |          Pre (d,t) -> if n = 0 then
-                             if d = def then dict else raise (Found word)
-                           else Pre (d, insert n t)
+                              if d = def then dict else raise (Found word)
+                            else Pre (d, insert n t)
     | Leg (c,l,m,r) as t -> if n = 0 then Pre (def,t)
-                           else let c' = word.[len-n]
-                                in if c' < c then Leg (c, insert n l, m, r)
-                                   else if c' > c then Leg (c, l, m, insert n r)
-                                        else Leg (c, l, insert (n-1) m, r)
+                            else let c' = word.[len-n]
+                                 in if c' < c then Leg (c, insert n l, m, r)
+                                    else if c' > c then Leg (c, l, m, insert n r)
+                                         else Leg (c, l, insert (n-1) m, r)
 
     in insert len dict
 
@@ -152,9 +152,9 @@ end
                 Nil -> raise Not_found
     |     Pre (d,t) -> if i = len then d else search i t
     | Leg (c,l,m,r) -> if i = len then raise Not_found
-                      else if word.[i] = c then search (i+1) m
-                           else search i (if word.[i] < c then l else r)
-  in search 0
+                       else if word.[i] = c then search (i+1) m
+                            else search i (if word.[i] < c then l else r)
+    in search 0
 
   let find_opt word dict : 'def option =
     try Some (find word dict) with Not_found -> None
@@ -168,15 +168,15 @@ end
                 Nil -> entries
     |     Pre (d,t) -> (rcat path, d) :: post path entries t
     | Leg (c,l,m,r) -> let path' = String.make 1 c :: path
-                      in post path (post path' (post path entries r) m) l
-  in post [] [] dict
+                       in post path (post path' (post path entries r) m) l
+    in post [] [] dict
 
   let definitions dict : 'def list =
     let rec post defs = function
                 Nil -> defs
     |     Pre (d,t) -> d :: post defs t
     | Leg (_,l,m,r) -> post (post (post defs r) m) l
-  in post [] dict
+    in post [] dict
 
   let rec suffix (c: char) = function
               Nil -> Nil
@@ -278,7 +278,7 @@ end = struct
     _,        Pre (_,t') -> suffix c (0,t')
   | _,     (Nil | Def _) -> empty
   | _,     Leg (x,l,m,r) -> if c = x then 0,m
-                            else suffix c (0,if c < x then l else r)
+                            else suffix c (0, if c < x then l else r)
   | j, (Cmp (p,t') as t) -> if p.[j] = c
                             then if String.length p = j+1
                                  then 0,t' else j+1,t
@@ -299,7 +299,7 @@ end = struct
                               else if key.[i] = p.[j]
                                    then search (i+1) (j+1) t
                                    else raise Not_found
-  in search 0 0 dict
+    in search 0 0 dict
 
   let find_opt key dict =
     try Some (find key dict) with Not_found -> None
@@ -312,7 +312,7 @@ end = struct
     |     Cmp (p,t) -> post (p::path) entries t
     | Leg (c,l,m,r) -> let path' = String.make 1 c :: path
                        in post path (post path' (post path entries r) m) l
-  in post [] [] dict
+    in post [] [] dict
 
   let definitions (_,dict) =
     let rec post defs = function
@@ -321,7 +321,7 @@ end = struct
     |     Pre (d,t) -> d :: post defs t
     |     Cmp (_,t) -> post defs t
     | Leg (_,l,m,r) -> post (post (post defs r) m) l
-  in post [] dict
+    in post [] dict
 
   let inorder (_,dict) =
     let rec post path entries = function
@@ -331,13 +331,13 @@ end = struct
     |     Cmp (p,t) -> post (p::path) entries t
     | Leg (c,l,m,r) -> let path' = String.make 1 c :: path
                        in post path' (post path (post path entries r) l) m
-  in post [] [] dict
+    in post [] [] dict
 
   let rec expand (path: string) (t: 'def pre_t) =
     let len = String.length path in
     let rec exp (i: int) : 'def Std.t =
       if i < len then Std.Leg (path.[i],Std.Nil,exp(i+1),Std.Nil) else norm t
-  in exp 0
+    in exp 0
 
   and norm : 'def pre_t -> 'def Std.t = function
               Nil -> Std.Nil
