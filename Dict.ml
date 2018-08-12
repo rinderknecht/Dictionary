@@ -202,8 +202,8 @@ end
       side-trees, and replacing [Pre] nodes with an empty subtree by a
       specific constructor [Def]. *)
   let rec compress (p: char list) : 'def t -> 'def Opt.pre_t = function
-    Leg(c,Nil,m,Nil) -> compress (c::p) m
-  |                t -> Opt.Cmp (rev_chars p, opti t)
+    Leg (c,Nil,m,Nil) -> compress (c::p) m
+  |                 t -> Opt.Cmp (rev_chars p, opti t)
 
   and opti : 'def t -> 'def Opt.pre_t = function
                   Nil -> Opt.Nil
