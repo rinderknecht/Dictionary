@@ -57,8 +57,8 @@ val find_opt : word -> 'def t -> 'def option
 val entries : 'def t -> 'def entry list
 
 (** The value of [definitions dict] is the list of definitions in the
-    dictionay [dict], sorted in alphabetic order.  It is equivalent to
-    [List.map snd (entries dict)].*)
+    dictionary [dict], sorted in alphabetic order.  It is equivalent
+    to [List.map snd (entries dict)].*)
 val definitions : 'def t -> 'def list
 
 (** The call [add word def dict] evaluates in a dictionary containing
