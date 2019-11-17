@@ -137,10 +137,12 @@ end
                               if d = def then dict else raise (Found word)
                             else Pre (d, insert n t)
     | Leg (c,l,m,r) as t -> if n = 0 then Pre (def,t)
-                            else let c' = word.[len-n]
-                                 in if c' < c then Leg (c, insert n l, m, r)
-                                    else if c' > c then Leg (c, l, m, insert n r)
-                                         else Leg (c, l, insert (n-1) m, r)
+                           else let c' = word.[len-n] in
+                                if   c' < c
+                                then Leg (c, insert n l, m, r)
+                                else if   c' > c
+                                     then Leg (c, l, m, insert n r)
+                                     else Leg (c, l, insert (n-1) m, r)
 
     in insert len dict
 
