@@ -1,0 +1,10 @@
+(library
+  (name Dictionary)
+  (public_name Dictionary)
+  (wrapped false)
+  (modules Dict))
+
+(test
+ (modules DictMain)
+ (libraries Dictionary)
+ (name DictMain))
