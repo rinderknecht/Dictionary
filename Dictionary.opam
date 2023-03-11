@@ -1,19 +1,16 @@
 opam-version : "2.0"
 version      : "1.0"
+synopsis     : "A minimal dictionary implemented on ternary search trees (TST)"
+description  : "Ternary search trees are an optimisation of the trie data structure where the children of a node are stored in a binary search tree instead of a list. Two implementations of a dictionary based on ternary search trees are proposed: a read-write one and a fast read-only one."
+authors      : ["Christian Rinderknecht"]
 maintainer   : "rinderknecht@free.fr"
-authors      : [ "Christian Rinderknecht" ]
-homepage     : "https://github.com/rinderknecht/UnionFind"
-bug-reports  : "https://github.com/rinderknecht/UnionFind/issues"
-dev-repo     : "git+https://github.com/rinderknecht/UnionFind.git"
+homepage     : "https://github.com/rinderknecht/Dictionary"
+bug-reports  : "https://github.com/rinderknecht/Dictionary/issues"
+dev-repo     : "git+https://github.com/rinderknecht/Dictionary.git"
 license      : "MIT"
-synopsis     : "A polymorphic implementation of the Union-Find data structure in OCaml"
-depends      : [ "dune" ]
-
-build        : [
-                [ "sh" "-c" "printf 'let version = \"%s\"' \"$(git describe --always --dirty --abbrev=0)\" > Version.ml" ]
-                [ "dune" "build" "-p" name "-j" jobs ]
-               ]
+depends      : ["dune"]
+build        : [["dune" "build" "-p" name]]
 
 url {
-  src: "https://github.com/rinderknecht/UnionFind/-/archive/master/UnionFind.tar.gz"
+  src: "https://github.com/rinderknecht/Dictionary/-/archive/master/Dictionary.tar.gz"
 }

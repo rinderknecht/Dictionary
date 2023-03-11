@@ -1,9 +1,12 @@
 (** Tiny unit test for the dictionaries implemented as ternary search trees *)
 
+module Dict = Dictionary.Dict
+
 (** The value [kwd_dict] is a dictionary of ASN.1 keywords. Their order
    in the list [keywords] has been determined to yield the optimal
    ternary search tree after sequential insertions (with
    List.fold_left). *)
+
 type kwd =
   ABSENT | ABSTRACT_SYNTAX | ALL | APPLICATION | AUTOMATIC | BEGIN
 | BIT | BMPString | BOOLEAN | BY | CHARACTER | CHOICE | CLASS

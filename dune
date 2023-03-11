@@ -1,7 +1,6 @@
 (library
   (name Dictionary)
   (public_name Dictionary)
-  (wrapped false)
   (modules Dict))
 
 (test
